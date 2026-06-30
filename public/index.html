@@ -50,6 +50,7 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
 .done-banner { text-align:center; padding:16px; color:var(--sub); font-size:13px; }
 .privacy-note { text-align:center; padding:12px; color:var(--sub); font-size:11px; }
 .scroll-btn { position:absolute; bottom:80px; right:20px; width:40px; height:40px; border-radius:50%; background:var(--pri); color:#fff; border:none; font-size:20px; cursor:pointer; display:none; box-shadow:0 2px 8px rgba(0,0,0,0.15); z-index:10; }
+.disclaimer { text-align:center; padding:8px 16px; font-size:10px; color:var(--sub); line-height:1.5; border-top:1px solid var(--border); }
 </style>
 </head>
 <body>
@@ -62,6 +63,7 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
     <h2>누구의 고민인가요?</h2>
     <button class="role-btn" onclick="start('parent')"><div class="label">👨‍👩‍👧 부모로서 아이가 고민이에요</div><div class="desc">아이의 행동, 관계에 대한 조언</div></button>
     <button class="role-btn" onclick="start('child')"><div class="label">🧒 자녀로서 부모님이 고민이에요</div><div class="desc">부모님과의 갈등, 소통 방법</div></button>
+    <div class="disclaimer">⚠️ AI가 생성한 답변은 참고용이며, 전문 심리상담을 대체하지 않습니다.<br>심각한 상황이라면 반드시 전문가와 상담하세요.</div>
   </div>
 
   <div class="chat-screen hidden" id="chatScreen">
@@ -71,6 +73,7 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
       <input id="userInput" placeholder="메시지를 입력하세요…" onkeydown="if(event.key==='Enter')send()">
       <button onclick="send()" id="sendBtn">↑</button>
     </div>
+    <div class="disclaimer">AI 상담사가 실수할 수 있습니다. 참고용으로만 활용하세요.</div>
   </div>
   <button class="scroll-btn" id="scrollBtn" onclick="scrollToBottom()">↓</button>
 </div>
