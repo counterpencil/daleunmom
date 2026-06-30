@@ -78,6 +78,8 @@ function addBubble(role, text) {
   document.getElementById('messages').scrollTop = 99999;
 }
 
+const API = 'https://seoromaeum.counterpencil.workers.dev/chat';
+
 async function send() {
   const input = document.getElementById('userInput');
   const text = input.value.trim();
@@ -92,7 +94,7 @@ async function send() {
   document.getElementById('messages').appendChild(typing);
 
   try {
-    const resp = await fetch('/chat', {
+    const resp = await fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ speaker, messages: msgHistory }),
