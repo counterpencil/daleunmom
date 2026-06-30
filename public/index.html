@@ -73,7 +73,10 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
 
   <!-- Screen 2: Profile (optional) -->
   <div class="screen hidden" id="screenProfile">
-    <h2>조금만 더 알려주세요 <span style="color:var(--sub);font-size:13px;">(선택)</span></h2>
+    <div style="display:flex;align-items:center;margin-bottom:8px;">
+      <button onclick="goBack()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--sub);padding:0 8px 0 0;">←</button>
+      <h2 style="font-size:18px;font-weight:500;">조금만 더 알려주세요 <span style="color:var(--sub);font-size:13px;">(선택)</span></h2>
+    </div>
     <p style="color:var(--sub);font-size:13px;text-align:center;">더 정확한 맞춤 조언을 드릴 수 있어요</p>
     <div class="input-row"><input id="profAge" placeholder="아이(또는 본인)의 나이 (예: 9살)" type="text"></div>
     <p style="font-size:13px;color:var(--sub);margin-top:8px;" id="genderLabel">성별</p>
@@ -81,7 +84,6 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
     <p style="font-size:13px;color:var(--sub);margin-top:8px;" id="temperLabel">성향은 어떤가요?</p>
     <div class="tag-row" id="tagTemperament"></div>
     <button class="btn" onclick="startChat()" style="text-align:center;margin-top:8px;background:var(--pri);color:#fff;border-color:var(--pri);">맞춤 상담 시작하기</button>
-    <button class="btn" onclick="goBack()" style="text-align:center;margin-top:4px;background:var(--bg);border-color:transparent;color:var(--sub);">← 뒤로</button>
     <p class="privacy-note">모든 정보는 기기에만 저장됩니다</p>
   </div>
 
