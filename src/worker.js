@@ -25,6 +25,16 @@ export default {
 
       const systemMsg = { role: "system", content: SYSTEM_PROMPTS[speaker] || SYSTEM_PROMPTS.child };
 
+      // 총 메시지 길이 제한: ~8000자까지 (초과분은 앞에서부터 자름)
+      let totalChars = systemMsg.content.length;
+      let trimmed = [];
+      for (let i = messages.length - 1; i >= 0; i--) {
+        const len = (messages[i].content || "").length;
+        if (totalChars + len > 8000) break;
+        trimmed.unshift(messages[i]);
+        totalChars += len;
+      }
+
       const resp = await fetch(DEEPSEEK_API, {
         method: "POST",
         headers: {
@@ -34,7 +44,7 @@ export default {
         body: JSON.stringify({
           model: "deepseek-chat",
           temperature: 0.5,
-          messages: [systemMsg, ...(messages || [])],
+          messages: [systemMsg, ...trimmed],
           response_format: { type: "json_object" },
         }),
       });
