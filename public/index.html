@@ -76,6 +76,8 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
     <h2>조금만 더 알려주세요 <span style="color:var(--sub);font-size:13px;">(선택)</span></h2>
     <p style="color:var(--sub);font-size:13px;text-align:center;">더 정확한 맞춤 조언을 드릴 수 있어요</p>
     <div class="input-row"><input id="profAge" placeholder="아이(또는 본인)의 나이 (예: 9살)" type="text"></div>
+    <p style="font-size:13px;color:var(--sub);margin-top:8px;">성별</p>
+    <div class="tag-row" id="tagGender"></div>
     <p style="font-size:13px;color:var(--sub);margin-top:8px;">성향은 어떤가요?</p>
     <div class="tag-row" id="tagTemperament"></div>
     <button class="btn" onclick="startChat()" style="text-align:center;margin-top:8px;">✨ 맞춤 상담 시작하기</button>
@@ -119,6 +121,20 @@ temperaments.forEach((t, i) => {
     else profile.temperament = profile.temperament.filter(x => x !== (isKO ? temperamentKO[i] : temperamentEN[i]));
   };
   tagRow.appendChild(tag);
+});
+
+// Gender tags
+const genders = isKO ? ['남자아이','여자아이'] : ['Boy','Girl'];
+const genderRow = document.getElementById('tagGender');
+genders.forEach(g => {
+  const tag = document.createElement('span');
+  tag.className = 'tag'; tag.textContent = g;
+  tag.onclick = () => {
+    genderRow.querySelectorAll('.tag').forEach(t => t.classList.remove('sel'));
+    tag.classList.add('sel');
+    profile.gender = g;
+  };
+  genderRow.appendChild(tag);
 });
 
 // i18n

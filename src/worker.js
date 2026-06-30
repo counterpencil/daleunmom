@@ -77,9 +77,10 @@ export default {
 
       // ── 프로필 컨텍스트 생성 ────────────────────
       let profileHint = "";
-      if (profile && (profile.age || profile.temperament?.length)) {
+      if (profile && (profile.age || profile.gender || profile.temperament?.length)) {
         profileHint = `\n[프로필]`;
         if (profile.age) profileHint += ` 나이: ${profile.age}`;
+        if (profile.gender) profileHint += `, ${profile.gender}`;
         if (profile.temperament?.length) profileHint += `, 성향: ${profile.temperament.join(', ')}`;
       }
 
