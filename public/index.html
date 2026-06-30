@@ -76,11 +76,12 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
     <h2>조금만 더 알려주세요 <span style="color:var(--sub);font-size:13px;">(선택)</span></h2>
     <p style="color:var(--sub);font-size:13px;text-align:center;">더 정확한 맞춤 조언을 드릴 수 있어요</p>
     <div class="input-row"><input id="profAge" placeholder="아이(또는 본인)의 나이 (예: 9살)" type="text"></div>
-    <p style="font-size:13px;color:var(--sub);margin-top:8px;">성별</p>
+    <p style="font-size:13px;color:var(--sub);margin-top:8px;" id="genderLabel">성별</p>
     <div class="tag-row" id="tagGender"></div>
-    <p style="font-size:13px;color:var(--sub);margin-top:8px;">성향은 어떤가요?</p>
+    <p style="font-size:13px;color:var(--sub);margin-top:8px;" id="temperLabel">성향은 어떤가요?</p>
     <div class="tag-row" id="tagTemperament"></div>
     <button class="btn" onclick="startChat()" style="text-align:center;margin-top:8px;background:var(--pri);color:#fff;border-color:var(--pri);">맞춤 상담 시작하기</button>
+    <button class="btn" onclick="goBack()" style="text-align:center;margin-top:4px;background:var(--bg);border-color:transparent;color:var(--sub);">← 뒤로</button>
     <p class="privacy-note">모든 정보는 기기에만 저장됩니다</p>
   </div>
 
@@ -123,20 +124,6 @@ temperaments.forEach((t, i) => {
   tagRow.appendChild(tag);
 });
 
-// Gender tags
-const genders = isKO ? ['남자아이','여자아이'] : ['Boy','Girl'];
-const genderRow = document.getElementById('tagGender');
-genders.forEach(g => {
-  const tag = document.createElement('span');
-  tag.className = 'tag'; tag.textContent = g;
-  tag.onclick = () => {
-    genderRow.querySelectorAll('.tag').forEach(t => t.classList.remove('sel'));
-    tag.classList.add('sel');
-    profile.gender = g;
-  };
-  genderRow.appendChild(tag);
-});
-
 // i18n
 const i18n = {
   ko: { title:'서로마음', subtitle:'부모와 아이, 서로의 마음을 보다', testBanner:'⚠️ 현재 테스트 중인 사이트입니다', privacy:'비공개 · 안전한 상담', roleTitle:'누구의 고민인가요?', roleParent:'부모로서 아이가 고민이에요', roleParentDesc:'아이의 행동, 관계에 대한 조언', roleChild:'자녀로서 부모님이 고민이에요', roleChildDesc:'부모님과의 갈등, 소통 방법', parentPrompt:'아이의 어떤 점이 고민이신가요?', childPrompt:'부모님과 어떤 일로 힘드신가요?', placeholder:'메시지를 입력하세요…', disclaimerChat:'AI 상담사가 실수할 수 있습니다. 참고용으로만 활용하세요.', error:'오류가 발생했습니다.' },
@@ -153,6 +140,44 @@ function setRole(role) {
   speaker = role;
   document.getElementById('screenRole').classList.add('hidden');
   document.getElementById('screenProfile').classList.remove('hidden');
+  
+  // Update placeholders based on role
+  const ageInput = document.getElementById('profAge');
+  const genderLabel = document.getElementById('genderLabel');
+  const temperLabel = document.getElementById('temperLabel');
+  
+  if (role === 'parent') {
+    ageInput.placeholder = "아이의 나이 (예: 9살)";
+    genderLabel.textContent = '아이의 성별';
+    temperLabel.textContent = '아이의 성향은 어떤가요?';
+  } else {
+    ageInput.placeholder = "본인의 나이 (예: 31살)";
+    genderLabel.textContent = '본인의 성별';
+    temperLabel.textContent = '본인의 성향은 어떤가요?';
+  }
+  
+  // Update gender tags
+  const genderRow = document.getElementById('tagGender');
+  genderRow.innerHTML = '';
+  const genders = role === 'parent' 
+    ? (isKO ? ['아들','딸'] : ['Son','Daughter'])
+    : (isKO ? ['아버지','어머니'] : ['Father','Mother']);
+  genders.forEach(g => {
+    const tag = document.createElement('span');
+    tag.className = 'tag'; tag.textContent = g;
+    tag.onclick = () => {
+      genderRow.querySelectorAll('.tag').forEach(t => t.classList.remove('sel'));
+      tag.classList.add('sel');
+      profile.gender = g;
+    };
+    genderRow.appendChild(tag);
+  });
+}
+
+function goBack() {
+  document.getElementById('screenProfile').classList.add('hidden');
+  document.getElementById('screenRole').classList.remove('hidden');
+  profile = {};
 }
 
 function startChat() {
