@@ -81,7 +81,7 @@ export default {
 
       const jResp = await fetch(API, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": auth,
+        headers: { "Content-Type": "application/json", "Authorization": auth },
         body: JSON.stringify(judgeBody),
       });
       const jData = await jResp.json();
@@ -104,7 +104,7 @@ export default {
 
       const resp = await fetch(API, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": auth,
+        headers: { "Content-Type": "application/json", "Authorization": auth },
         body: JSON.stringify(respBody),
       });
 
