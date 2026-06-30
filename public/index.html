@@ -73,8 +73,7 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
   <div class="screen hidden" id="screenProfile">
     <h2>조금만 더 알려주세요 <span style="color:var(--sub);font-size:13px;">(선택)</span></h2>
     <p style="color:var(--sub);font-size:13px;text-align:center;">더 정확한 맞춤 조언을 드릴 수 있어요</p>
-    <div class="input-row"><input id="profName" placeholder="이름 또는 별명 (예: 지훈이)"></div>
-    <div class="input-row"><input id="profAge" placeholder="나이 (예: 9살)" type="text"></div>
+    <div class="input-row"><input id="profAge" placeholder="아이(또는 본인)의 나이 (예: 9살)" type="text"></div>
     <p style="font-size:13px;color:var(--sub);margin-top:8px;">성향은 어떤가요?</p>
     <div class="tag-row" id="tagTemperament"></div>
     <button class="btn" onclick="startChat()" style="text-align:center;margin-top:8px;">✨ 맞춤 상담 시작하기</button>
@@ -140,7 +139,6 @@ function setRole(role) {
 }
 
 function startChat() {
-  profile.name = document.getElementById('profName').value.trim();
   profile.age = document.getElementById('profAge').value.trim();
   goToChat();
 }

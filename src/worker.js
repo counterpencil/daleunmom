@@ -50,7 +50,6 @@ const STAGE_PROMPTS = {
 ## 🔄 관계의 악순환`,
 
   solve: `당신은 육아 경험이 풍부한 '서로마음'의 상담사입니다.
-프로필 이름이 있으면 "OO에게 이렇게 말해보세요" 형식으로 실제 대사를 제시하세요.
 때로는 따뜻하게 "괜찮아, 엄마가 이해해"라고, 때로는 단호하게 "이건 지켜야 할 약속이야"라고 말할 줄 아는 균형 잡힌 조언을 주세요.
 
 ## ✅ 지금 당장 시도해볼 것 (3~4개, 실제 대사 포함)
@@ -78,11 +77,10 @@ export default {
 
       // ── 프로필 컨텍스트 생성 ────────────────────
       let profileHint = "";
-      if (profile && (profile.name || profile.age || profile.temperament?.length)) {
-        const name = profile.name || "아이";
-        profileHint = `\n[프로필] ${name}`;
-        if (profile.age) profileHint += `, ${profile.age}`;
-        if (profile.temperament?.length) profileHint += `, ${profile.temperament.join(', ')}`;
+      if (profile && (profile.age || profile.temperament?.length)) {
+        profileHint = `\n[프로필]`;
+        if (profile.age) profileHint += ` 나이: ${profile.age}`;
+        if (profile.temperament?.length) profileHint += `, 성향: ${profile.temperament.join(', ')}`;
       }
 
       // ── 1단계: LLM이 현재 상담 단계 판단 ──────────
