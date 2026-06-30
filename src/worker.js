@@ -1,6 +1,7 @@
-/* 서로마음 — Worker (하네스: LLM 판단 → 코드 라우팅) */
+/* 서로마음 — Worker (하네스 + 하이브리드 RAG) */
 
 const API = "https://api.deepseek.com/v1/chat/completions";
+import { searchScenarios } from "./scenarios_index.js";
 const B = "\x42\x65\x61\x72\x65\x72";
 
 // ── 1차 호출: 현재 상태 판단 ──────────────────────────
@@ -92,11 +93,23 @@ export default {
 
       // ── 2단계: 판단된 단계에 맞는 응답 생성 ──────────
       const prompt = STAGE_PROMPTS[stage] || STAGE_PROMPTS.intake;
+
+      // RAG: analyze/solve 단계에서 유사 시나리오 검색
+      let ragContext = "";
+      if (stage === "analyze" || stage === "solve") {
+        const lastMsg = (messages || []).slice(-1)[0]?.content || "";
+        const scenarios = searchScenarios(lastMsg);
+        if (scenarios.length > 0) {
+          ragContext = "\n\n참고할 유사 상담 사례:\n" + scenarios.map((s, i) =>
+            `${i+1}. 상황: ${s.situation}\n   분석: ${s.analysis}\n   해결: ${s.solution}`
+          ).join("\n\n");
+        }
+      }
       const respBody = {
         model: "deepseek-chat",
         temperature: stage === "intake" || stage === "assess" ? 0.4 : 0.6,
         messages: [
-          { role: "system", content: prompt },
+          { role: "system", content: prompt + ragContext },
           ...(messages || []),
         ],
         stream: true,
