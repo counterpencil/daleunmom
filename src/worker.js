@@ -25,16 +25,6 @@ export default {
 
       const systemMsg = { role: "system", content: SYSTEM_PROMPTS[speaker] || SYSTEM_PROMPTS.child };
 
-      // 총 메시지 길이 제한: ~8000자까지 (초과분은 앞에서부터 자름)
-      let totalChars = systemMsg.content.length;
-      let trimmed = [];
-      for (let i = messages.length - 1; i >= 0; i--) {
-        const len = (messages[i].content || "").length;
-        if (totalChars + len > 8000) break;
-        trimmed.unshift(messages[i]);
-        totalChars += len;
-      }
-
       const resp = await fetch(DEEPSEEK_API, {
         method: "POST",
         headers: {
@@ -44,13 +34,19 @@ export default {
         body: JSON.stringify({
           model: "deepseek-chat",
           temperature: 0.5,
-          messages: [systemMsg, ...trimmed],
+          messages: [systemMsg, ...(messages || [])],
           response_format: { type: "json_object" },
         }),
       });
 
       const data = await resp.json();
-      const content = JSON.parse(data.choices?.[0]?.message?.content || "{}");
+      const raw = data.choices?.[0]?.message?.content || "{}";
+      let content;
+      try {
+        content = JSON.parse(raw);
+      } catch {
+        content = { message: raw, stage: "assessment" };
+      }
 
       // D1 로깅 (에러 무시)
       try {
