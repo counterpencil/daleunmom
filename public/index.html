@@ -98,7 +98,7 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
       <button onclick="send()" id="sendBtn">↑</button>
     </div>
     <div class="disclaimer" data-i18n="disclaimerChat">AI 상담사가 실수할 수 있습니다. 참고용으로만 활용하세요.</div>
-    <div style="text-align:center;padding:4px 16px 8px;font-size:9px;color:var(--sub);">© 2026 서로마음. 문의: counterpencil@gmail.com</div>
+    <div style="text-align:center;padding:4px 16px 8px;font-size:9px;color:var(--sub);">© 2026 다른맘. 문의: counterpencil@gmail.com</div>
   </div>
   <button class="scroll-btn" id="scrollBtn" onclick="scrollToBottom()">↓</button>
 </div>
@@ -131,8 +131,8 @@ temperaments.forEach((t, i) => {
 
 // i18n
 const i18n = {
-  ko: { title:'서로마음', subtitle:'부모와 아이, 서로의 마음을 보다', testBanner:'⚠️ 현재 테스트 중인 사이트입니다', privacy:'비공개 · 안전한 상담', roleTitle:'누구의 고민인가요?', roleParent:'부모로서 아이가 고민이에요', roleParentDesc:'아이의 행동, 관계에 대한 조언', roleChild:'자녀로서 부모님이 고민이에요', roleChildDesc:'부모님과의 갈등, 소통 방법', parentPrompt:'아이의 어떤 점이 고민이신가요?', childPrompt:'부모님과 어떤 일로 힘드신가요?', placeholder:'메시지를 입력하세요…', disclaimerChat:'AI 상담사가 실수할 수 있습니다. 참고용으로만 활용하세요.', error:'오류가 발생했습니다.' },
-  en: { title:'Between Us', subtitle:'Seeing each other, heart to heart', testBanner:'⚠️ Test site', privacy:'Private · Secure', roleTitle:'Whose concern?', roleParent:'I\'m a parent', roleParentDesc:'Worried about my child', roleChild:'I\'m a child', roleChildDesc:'Worried about my parent', parentPrompt:'What concerns you?', childPrompt:'What\'s troubling you?', placeholder:'Type a message…', disclaimerChat:'AI can make mistakes.', error:'An error occurred.' },
+  ko: { title:'다른맘', subtitle:'다른 마음을 이해하는 공간',testBanner:'⚠️ 현재 테스트 중인 사이트입니다', privacy:'비공개 · 안전한 상담', roleTitle:'누구의 고민인가요?', roleParent:'부모로서 아이가 고민이에요', roleParentDesc:'아이의 행동, 관계에 대한 조언', roleChild:'자녀로서 부모님이 고민이에요', roleChildDesc:'부모님과의 갈등, 소통 방법', parentPrompt:'아이의 어떤 점이 고민이신가요?', childPrompt:'부모님과 어떤 일로 힘드신가요?', placeholder:'메시지를 입력하세요…', disclaimerChat:'AI 상담사가 실수할 수 있습니다. 참고용으로만 활용하세요.', error:'오류가 발생했습니다.' },
+  en: { title:'DaleunMom', subtitle:'Understanding Different Hearts', testBanner:'⚠️ Test site', privacy:'Private · Secure', roleTitle:'Whose concern?', roleParent:'I\'m a parent', roleParentDesc:'Worried about my child', roleChild:'I\'m a child', roleChildDesc:'Worried about my parent', parentPrompt:'What concerns you?', childPrompt:'What\'s troubling you?', placeholder:'Type a message…', disclaimerChat:'AI can make mistakes.', error:'An error occurred.' },
 };
 function t(k) { return (i18n[isKO?'ko':'en']||i18n.en)[k]||k; }
 function applyI18n(){document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(e.tagName==='INPUT')e.placeholder=t(k);else e.textContent=t(k)});document.title=t('title');}
