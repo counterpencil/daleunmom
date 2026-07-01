@@ -73,16 +73,16 @@ JSON: {"risk":0,"stage":"assess","reason":"..."}`;
 const SAFETY_BLOCK_KO = "이런 고민은 전문 상담 센터(한국정신건강복지센터 1577-0199)의 도움을 받으시는 것이 좋습니다. 다른맘은 가벼운 육아 고민만 도와드릴 수 있습니다.";
 const SAFETY_BLOCK_EN = "This concern may require professional help. Please contact a mental health professional or crisis hotline. DaleunMom can only assist with everyday parenting concerns.";
 
-const COMFORT = `[필수 규칙 — 위반 시 응답 전체가 거부됩니다]
+const COMFORT = `[필수 규칙]
 
 1. 절대 부모님을 비난하지 마세요. "부모님이 ~해서"라는 인과관계 설명 금지.
    → ❌ "부모님이 불안해하셔서 아이도 불안합니다"
-   → ✅ "아이의 불안은 이 시기 자연스러운 현상입니다. 부모님 탓이 아닙니다"
+   → ✅ "아이의 불안은 이 시기 자연스러운 현상입니다"
 
 2. 모든 해결책은 제안형으로. "~하세요" 금지.
    → "이런 방법을 시도해보시는 건 어떨까요?"
 
-3. 매 응답마다 "부모님 탓이 아닙니다" 또는 "자연스러운 모습입니다" 포함.`;
+3. 부모가 자책하는 느낌이 들 때만 자연스럽게 "부모님 탓이 아닙니다"를 말하세요. 무리하게 넣지 마세요.`;
 
 const STAGE_PROMPTS = {
   intake: `공감하고 고민을 더 물어보세요. 2~3문장.`,
