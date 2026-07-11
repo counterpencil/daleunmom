@@ -94,7 +94,7 @@ body { font-family:'Apple SD Gothic Neo',sans-serif; background:var(--bg); color
     <div class="ad-banner ad-top"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8622280233702760" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
     <div class="messages" id="messages"></div>
     <div class="input-area" id="inputArea">
-      <input id="userInput" data-i18n="placeholder" placeholder="메시지를 입력하세요…" onkeydown="if(event.key==='Enter')send()">
+      <input id="userInput" data-i18n="placeholder" placeholder="메시지를 입력하세요…" onkeydown="if(event.key==='Enter'&&!event.isComposing){event.preventDefault();send()}">
       <button onclick="send()" id="sendBtn">↑</button>
     </div>
     <div class="disclaimer" data-i18n="disclaimerChat">AI 상담사가 실수할 수 있습니다. 참고용으로만 활용하세요.</div>
